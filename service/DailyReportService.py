@@ -18,6 +18,9 @@ class DailyReportService:
         self.csv_repo = DailyReportRepository()
         self._initialized = True
 
+    def delete_everything_from_database(self):
+        self.csv_repo.delete_everything_from_database()
+
     def create_daily_report(
             self,
             day: datetime,

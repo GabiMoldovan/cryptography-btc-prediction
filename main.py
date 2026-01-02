@@ -24,7 +24,8 @@ if __name__ == '__main__':
 
     print(daily_report.toString())
     """
-
+    daily_report_service = DailyReportService()
     csv_service = CSVService()
 
+    #daily_report_service.delete_everything_from_database()
     csv_service.parse_csvs()
