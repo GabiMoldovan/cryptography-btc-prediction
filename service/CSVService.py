@@ -24,11 +24,13 @@ class CSVService:
         starting_year = 2020
         ending_year = 2025
 
-        for year in range(starting_year, ending_year):
+        # range is [starting_year, ending_year + 1] => [2020, 2025]
+        for year in range(starting_year, ending_year + 1):
             filepath = f"./bitcoin_csv/btc_{year}_clean.csv"
 
             csv_service = CSVService()
             csv_service.read_csv(filepath)
+            print("Successfully saved the data for year " + str(year))
 
     def read_csv(self, filepath: str) -> None:
         df = pd.read_csv(filepath)
