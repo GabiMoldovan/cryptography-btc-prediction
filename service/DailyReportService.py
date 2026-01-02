@@ -29,4 +29,4 @@ class DailyReportService:
             close_value: Decimal,
             circulating_currency: int
     ) -> DailyReport:
-        return self.csv_repo.create_daily_report(day, time_high, time_low, open_value, high_value, low_value, close_value, circulating_currency)
+        return self.csv_repo.save_daily_report(day, time_high, time_low, open_value, high_value, low_value, close_value, circulating_currency)

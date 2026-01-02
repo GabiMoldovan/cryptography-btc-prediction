@@ -8,9 +8,11 @@ from contextlib import contextmanager
 Base = declarative_base()
 
 class Database:
-    '''
+
+    """
     Class for managing database connections
-    '''
+    """
+
     _instance = None
     _lock = Lock()
     _tables_created = False
@@ -53,7 +55,7 @@ class Database:
     def session(self):
         """
         Context manager that automatically closes the session.
-        Also automatically rolls back on exception, and commits if successful.
+        Also automatically rolls back on exception, and commits if successful
         """
         session = self.get_session()
         try:

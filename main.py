@@ -1,13 +1,15 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 
+from service.CSVService import CSVService
 from service.DailyReportService import DailyReportService
 
 if __name__ == '__main__':
     print('Goodbye, world!')
 
+    """
     daily_report_service = DailyReportService()
-
+    
     # Create a daily report example
     daily_report = daily_report_service.create_daily_report(
         day=datetime(2025, 1, 2, 0, 0, 0, tzinfo=timezone.utc),
@@ -21,3 +23,8 @@ if __name__ == '__main__':
     )
 
     print(daily_report.toString())
+    """
+
+    csv_service = CSVService()
+
+    csv_service.parse_csvs()

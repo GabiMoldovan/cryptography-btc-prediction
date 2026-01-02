@@ -4,19 +4,8 @@ from datetime import datetime
 from decimal import Decimal
 
 class DailyReportRepository:
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
     def __init__(self):
-        if getattr(self, "_initialized", False):
-            return
-
         self.__db = Database()
-        self._initialized = True
 
     def delete_everything_from_database(self):
         with self.__db.session() as session:
@@ -24,7 +13,7 @@ class DailyReportRepository:
                 session.execute(table.delete())
             session.commit()
 
-    def create_daily_report(
+    def save_daily_report(
             self,
             day: datetime,
             time_high: datetime,
