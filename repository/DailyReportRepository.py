@@ -1,6 +1,6 @@
 from database import Database, Base
 from model import DailyReport
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 
 class DailyReportRepository:
@@ -40,3 +40,29 @@ class DailyReportRepository:
             session.flush()
 
         return daily_report
+
+    def get_annual_report(self, year: int) -> list[DailyReport]:
+        start_date = datetime(year, 1, 1, tzinfo=timezone.utc)
+        end_date = datetime(year + 1, 1, 1, tzinfo=timezone.utc)
+
+        with self.__db.session() as session:
+            reports = (
+                session.query(DailyReport)
+                .filter(DailyReport.day >= start_date)
+                .filter(DailyReport.day < end_date)
+                .order_by(DailyReport.day.asc())
+                .all()
+            )
+
+        return reports
+
+    def get_reports_between(self, start_dt: datetime, end_dt: datetime) -> list[DailyReport]:
+        with self.__db.session() as session:
+            reports = (
+                session.query(DailyReport)
+                .filter(DailyReport.day >= start_dt)
+                .filter(DailyReport.day < end_dt)
+                .order_by(DailyReport.day.asc())
+                .all()
+            )
+        return reports

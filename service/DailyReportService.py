@@ -33,3 +33,9 @@ class DailyReportService:
             circulating_currency: int
     ) -> DailyReport:
         return self.csv_repo.save_daily_report(day, time_high, time_low, open_value, high_value, low_value, close_value, circulating_currency)
+
+    def get_annual_report(self, year: int) -> list[DailyReport]:
+        return self.csv_repo.get_annual_report(year)
+
+    def get_reports_between(self, start_dt: datetime, end_dt: datetime):
+        return self.csv_repo.get_reports_between(start_dt, end_dt)
